@@ -21,13 +21,6 @@ class Solution {
             nums[i] = list.get(i);
         }
 
-        // for (int i = 0; i < nums.length - 1; i++) {
-        //     for (int j = i + 1; nums.length; j++) {
-        //         // nums[k] 재배치 when? 중복 요소가 없을 때
-                
-        //     }
-        // }
-
         return k;
     }
 }
