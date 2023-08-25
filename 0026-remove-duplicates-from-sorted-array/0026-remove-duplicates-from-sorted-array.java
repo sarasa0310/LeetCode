@@ -1,24 +1,16 @@
-import java.util.ArrayList;
-
 class Solution {
     public int removeDuplicates(int[] nums) {
-        // 고유한 요소를 담기 위해 ArrayList 사용
-        ArrayList<Integer> list = new ArrayList<>();
+        // two-pointer 전략
+        // k를 인덱스로 활용
+        int k = 1;
 
-        // nums의 고유한 요소 수 k
-        int k = 0;
-
-        // nums를 전체 순회하면서 list에 없으면 list에 채워준다
-        for (int n : nums) {
-            if (!list.contains(n)) {
-                list.add(n);
+        // 2번째 요소부터 nums 전체 순회
+        for (int i = 1; i < nums.length; i++) {
+            // 오름차순 정렬되어 있기 때문에 바로 이전 요소랑만 비교해주면 됨
+            if (nums[i] != nums[i - 1]) {
+                nums[k] = nums[i];
                 k++;
             }
-        }
-
-        // nums 재배치
-        for (int i = 0; i < list.size(); i++) {
-            nums[i] = list.get(i);
         }
 
         return k;
