@@ -1,28 +1,25 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        // 배열 nums에서 가장 많이 등장하는 요소 찾기
-        // 가장 많이 등장하는 요소는 n / 2 이상 존재해야 한다
-
         // HashMap 사용 방법
         // nums의 요소를 key로, 등장 빈도를 value로 활용
 
-        // 1. HashMap 선언
+        // 1. map 선언 및 초기화
         Map<Integer, Integer> map = new HashMap<>();
 
         // 2. nums를 순회하면서 map 업데이트
         for (int i = 0; i < nums.length; i++) {
-            // 2 - 1. key가 존재하면 갱신
+            // 2-1. key가 존재하면 등장 빈도 갱신
             if (map.containsKey(nums[i])) {
                 int count = map.get(nums[i]) + 1;
                 map.put(nums[i], count);
             }
 
-            // 2 - 2. key가 없으면 생성
-            if (!map.containsKey(nums[i])) {
+            // 2-2. key가 없으면 생성 및 value 1 할당
+            else {
                 map.put(nums[i], 1);
             }
 
-            // 2 - 3. n / 2 보다 많이 등장하면 리턴
+            // 2-3. n / 2 보다 많이 등장하면 리턴
             if (map.get(nums[i]) > nums.length / 2) {
                 return nums[i];
             }
