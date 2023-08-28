@@ -3,24 +3,34 @@ class Solution {
         // 배열 nums에서 가장 많이 등장하는 요소 찾기
         // 가장 많이 등장하는 요소는 n / 2 이상 존재해야 한다
 
-        // naive 이중 반복문 
-        int maxCount = 0;
-        int index = -1;
+        // 배열 nums의 각 요소의 등장 빈도를 세어 maxCount 업데이트
+        // maxCount를 업데이트 하면서 해당 요소의 인덱스 갱신
 
+        // 1. 각 요소의 등장 빈도를 세어 줄 maxCount
+        int maxCount = 0;
+
+        // 2. maxCount가 업데이트 되는 지점의 인덱스를 담아 줄 idx
+        int idx = 0;
+
+        // 3. 이중 반복문을 통해 배열 nums를 순회하면서 maxCount 및 idx 업데이트
         for (int i = 0; i < nums.length; i++) {
+            // 매번 업데이트 해야 하므로 count를 0으로 갱신
             int count = 0;
+
             for (int j = 0; j < nums.length; j++) {
-                if (nums[i] == nums[j]) {
-                    count++;
-                }
+                // 요소가 같으면 count 업데이트
+                if (nums[i] == nums[j]) count++;
             }
+
+            // maxCount 및 idx 갱신
             if (count > maxCount) {
                 maxCount = count;
-                index = i;
+                idx = i;
             }
         }
 
-        return nums[index];
+        // maxCount가 업데이트 된 인덱스 요소를 반환
+        return nums[idx];
 
         // // 요소를 인덱스로 사용하고, 가장 큰 요소가 담긴 인덱스를 반환?
 
