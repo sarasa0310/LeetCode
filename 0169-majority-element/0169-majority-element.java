@@ -3,34 +3,32 @@ class Solution {
         // 배열 nums에서 가장 많이 등장하는 요소 찾기
         // 가장 많이 등장하는 요소는 n / 2 이상 존재해야 한다
 
-        // 배열 nums의 각 요소의 등장 빈도를 세어 maxCount 업데이트
-        // maxCount를 업데이트 하면서 해당 요소의 인덱스 갱신
+        // HashMap 사용 방법
+        // nums의 요소를 key로, 등장 빈도를 value로 활용
 
-        // 1. 각 요소의 등장 빈도를 세어 줄 maxCount
-        int maxCount = 0;
+        // 1. HashMap 선언
+        Map<Integer, Integer> map = new HashMap<>();
 
-        // 2. maxCount가 업데이트 되는 지점의 인덱스를 담아 줄 idx
-        int idx = 0;
-
-        // 3. 이중 반복문을 통해 배열 nums를 순회하면서 maxCount 및 idx 업데이트
+        // 2. nums를 순회하면서 map 업데이트
         for (int i = 0; i < nums.length; i++) {
-            // 매번 업데이트 해야 하므로 count를 0으로 갱신
-            int count = 0;
-
-            for (int j = 0; j < nums.length; j++) {
-                // 요소가 같으면 count 업데이트
-                if (nums[i] == nums[j]) count++;
+            // 2 - 1. key가 존재하면 갱신
+            if (map.containsKey(nums[i])) {
+                int count = map.get(nums[i]) + 1;
+                map.put(nums[i], count);
             }
 
-            // maxCount 및 idx 갱신
-            if (count > maxCount) {
-                maxCount = count;
-                idx = i;
+            // 2 - 2. key가 없으면 생성
+            if (!map.containsKey(nums[i])) {
+                map.put(nums[i], 1);
+            }
+
+            // 2 - 3. n / 2 보다 많이 등장하면 리턴
+            if (map.get(nums[i]) > nums.length / 2) {
+                return nums[i];
             }
         }
 
-        // maxCount가 업데이트 된 인덱스 요소를 반환
-        return nums[idx];
+        return -1;
 
         // // 요소를 인덱스로 사용하고, 가장 큰 요소가 담긴 인덱스를 반환?
 
