@@ -14,7 +14,7 @@ class Solution {
          for (int i = 0; i < nums.length; i++) {
              // 요소가 이미 key로 등록되어 있으면,
              if (map.containsKey(nums[i])) {
-                 // 인덱스를 뺐을 때 절대값이 k보다 작거나 같다면 ture 리턴
+                 // 인덱스를 뺐을 때 절대값이 k보다 작거나 같다면 true 리턴
                  if (Math.abs(i - map.get(nums[i])) <= k) {
                     return true;
                  } else { // 새로운 인덱스로 업데이트
