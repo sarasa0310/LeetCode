@@ -14,36 +14,23 @@
  * }
  */
 class Solution {
+    private int minDif = Integer.MAX_VALUE;
+    private TreeNode prev = null;
+
     public int getMinimumDifference(TreeNode root) {
-
-        /**
-        - 이진 탐색 트리의 루트 노드가 주어졌을 때
-        - 노드 간 최소 절대 차이값을 반환
-         */
-
-        // 1. 중위 순회를 통해 values에 모든 값 집어 넣기
-        List<Integer> values = new ArrayList<>();
-
-        inOrder(root, values); // 중위 순회이므로 정렬되어 있음
-
-        // 2. 최소 차이값 찾기
-        int result = Integer.MAX_VALUE; // 정수 최대값으로 초기화
-
-        // 정렬되어 있으므로 1차원 반복문으로 해결 가능
-        for (int i = 1; i < values.size(); i++) {
-            int dif = values.get(i) - values.get(i - 1);
-            result = Math.min(result, dif);
-        }
-
-        return result;
+        inOrder(root);
+        return minDif;
     }
 
     // 중위 순회
-    private void inOrder(TreeNode node, List<Integer> values) {
+    private void inOrder(TreeNode node) {
         if (node != null) {
-            if (node.left != null) inOrder(node.left, values);
-            values.add(node.val);
-            if (node.right != null) inOrder(node.right, values);
+            if (node.left != null) inOrder(node.left);
+            if (prev != null) {
+                minDif = Math.min(minDif, node.val - prev.val);
+            }
+            prev = node;
+            if (node.right != null) inOrder(node.right);
         }
     }
 
