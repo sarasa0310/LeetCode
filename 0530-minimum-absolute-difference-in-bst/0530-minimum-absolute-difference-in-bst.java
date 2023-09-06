@@ -30,9 +30,9 @@ class Solution {
         int result = Integer.MAX_VALUE; // 정수 최대값으로 초기화
 
         // 정렬되어 있으므로 1차원 반복문으로 해결 가능
-        for (int i = 0; i < values.size() - 1; i++) {
-            int dif = values.get(i + 1) - values.get(i);
-            if (dif < result) result = dif;
+        for (int i = 1; i < values.size(); i++) {
+            int dif = values.get(i) - values.get(i - 1);
+            result = Math.min(result, dif);
         }
 
         return result;
