@@ -24,30 +24,21 @@ class Solution {
         // 1. 중위 순회를 통해 values에 모든 값 집어 넣기
         List<Integer> values = new ArrayList<>();
 
-        inOrder(root, values);
+        inOrder(root, values); // 중위 순회이므로 정렬되어 있음
 
-        System.out.println(values);
+        // 2. 최소 차이값 찾기
+        int result = Integer.MAX_VALUE; // 정수 최대값으로 초기화
 
-        // 2. 이중 반복문으로 최소 절대 차이값 찾기
-        int result = Integer.MAX_VALUE;
-
+        // 정렬되어 있으므로 1차원 반복문으로 해결 가능
         for (int i = 0; i < values.size() - 1; i++) {
             int dif = values.get(i + 1) - values.get(i);
             if (dif < result) result = dif;
         }
 
-        // for (int i = 0; i < values.size(); i++) {
-        //     for (int j = i + 1; j < values.size(); j++) {
-        //         int difAbs = Math.abs(values.get(i) - values.get(j));
-        //         if (difAbs < result) {
-        //             result = difAbs;
-        //         }
-        //     }
-        // }
-
         return result;
     }
 
+    // 중위 순회
     private void inOrder(TreeNode node, List<Integer> values) {
         if (node != null) {
             if (node.left != null) inOrder(node.left, values);
@@ -55,4 +46,5 @@ class Solution {
             if (node.right != null) inOrder(node.right, values);
         }
     }
+
 }
