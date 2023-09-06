@@ -21,14 +21,16 @@ class Solution {
         - 노드 간 최소 절대 차이값을 반환
          */
 
-        // 1. 깊이 우선 탐색을 통해 values에 모든 값을 집어 넣기
+        // 1. 전위 순회를 통해 values에 모든 값 집어 넣기
         List<Integer> values = new ArrayList<>();
 
-        dfs(root, values);
+        inOrder(root, values);
 
-        int result = Integer.MAX_VALUE;
+        System.out.println(values);
 
         // 2. 이중 반복문으로 최소 절대 차이값 찾기
+        int result = Integer.MAX_VALUE;
+
         for (int i = 0; i < values.size(); i++) {
             for (int j = i + 1; j < values.size(); j++) {
                 int difAbs = Math.abs(values.get(i) - values.get(j));
@@ -41,11 +43,11 @@ class Solution {
         return result;
     }
 
-    private void dfs(TreeNode node, List<Integer> values) {
+    private void inOrder(TreeNode node, List<Integer> values) {
         if (node != null) {
+            if (node.left != null) inOrder(node.left, values);
             values.add(node.val);
-            if (node.left != null) dfs(node.left, values);
-            if (node.right != null) dfs(node.right, values);
+            if (node.right != null) inOrder(node.right, values);
         }
     }
 }
