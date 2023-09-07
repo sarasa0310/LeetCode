@@ -29,17 +29,16 @@ class Solution {
 
         while (!queue.isEmpty()) {
             int n = queue.size();
-            double avg = 0L;
+            double sum = 0l;
 
             for (int i = 0; i < n; i++) {
                 TreeNode current = queue.poll();
-                avg += (double) current.val;
+                sum += current.val;
                 if (current.left != null) queue.add(current.left);
                 if (current.right != null) queue.add(current.right);
             }
 
-            avg /= n;
-            result.add(avg);
+            result.add(sum / n);
         }
 
         return result;
