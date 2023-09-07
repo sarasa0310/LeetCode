@@ -28,8 +28,8 @@ class Solution {
         queue.add(root);
 
         while (!queue.isEmpty()) {
+            double sum = 0;
             int n = queue.size();
-            double sum = 0l;
 
             for (int i = 0; i < n; i++) {
                 TreeNode current = queue.poll();
