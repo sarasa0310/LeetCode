@@ -15,7 +15,7 @@
  */
 class Solution {
 
-    private int count = 1;
+    private int count = 0;
     private int result = 0;
 
     public int kthSmallest(TreeNode root, int k) {
@@ -34,8 +34,8 @@ class Solution {
     // 중위 순회
     private void inOrderSearch(TreeNode node, int k) {
         if (node.left != null) inOrderSearch(node.left , k);
-        if (count == k) result = node.val;
         count++;
+        if (count == k) result = node.val;
         if (node.right != null) inOrderSearch(node.right, k);
     }
 
