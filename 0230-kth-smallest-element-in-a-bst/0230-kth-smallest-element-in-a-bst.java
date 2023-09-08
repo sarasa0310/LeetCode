@@ -25,13 +25,14 @@ class Solution {
         모든 노드의 값 중에서 k번째로 작은 값을 반환
          */
         
-        // 중위 순회를 하면서 count를 통해 count가 k가 되었을 때 노드 값을 반환?
+        // 중위 순회를 하면서 count가 k가 되었을 때 노드 값을 반환
         inOrderSearch(root, k);
 
         return result;
     }
 
-    // 중위 순회
+    // 중위 순회를 하면서 count를 늘려주고
+    // k번째 작은 값을 만났을 때 result에 노드의 값을 담아준다.
     private void inOrderSearch(TreeNode node, int k) {
         if (node.left != null) inOrderSearch(node.left , k);
         count++;
