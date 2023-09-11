@@ -51,11 +51,11 @@ class Trie {
         // Node를 찾기 위한 word의 첫 글자 c
         char c = word.charAt(0);
 
+        // children에 해당 노드가 없으면 단어가 없으므로 false 리턴
+        if (!node.children.containsKey(c)) return false;
+
         // 해당 글자로 찾은 노드
         Node child = node.children.get(c);
-
-        // children에 해당 노드가 없으면 단어가 없으므로 false 리턴
-        if (child == null) return false;
 
         // 다음 노드와 첫 글자를 자른 word를 넣어 재귀 호출
         return searchRecursively(child, word.substring(1));
@@ -75,11 +75,11 @@ class Trie {
         // Node를 찾기 위한 word의 첫 글자 c
         char c = word.charAt(0);
 
+        // children에 해당 노드가 없으면 단어가 없으므로 false 리턴
+        if (!node.children.containsKey(c)) return false;
+
         // 해당 글자로 찾은 노드
         Node child = node.children.get(c);
-
-        // children에 해당 노드가 없으면 단어가 없으므로 false 리턴
-        if (child == null) return false;
 
         // 다음 노드와 첫 글자를 자른 word를 넣어 재귀 호출
         return starsWithRecursively(child, word.substring(1));
