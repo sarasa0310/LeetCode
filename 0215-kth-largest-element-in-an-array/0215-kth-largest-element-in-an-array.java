@@ -1,7 +1,3 @@
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.Collections;
-
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         
@@ -11,30 +7,36 @@ class Solution {
         정렬 없이 해결
          */
 
-        Integer[] boxedNums = Arrays.stream(nums)
-                                    .boxed()
-                                    .toArray(Integer[]::new);
+        // PriorityQueue 이용하는 방법 - k번째 큰 값을 찾아야 하므로 MaxHeap 이용
+        PriorityQueue<Integer> priorityQueue = 
+        new PriorityQueue<>(Collections.reverseOrder());
 
-        Arrays.sort(boxedNums, Collections.reverseOrder());
+        // priorityQueue에 nums의 값을 모두 담아준다.
+        // 자동으로 최대값이 위에 올라오게 된다.
+        for (int num : nums) {
+            priorityQueue.add(num);
+        }
 
-        return boxedNums[k - 1];
+        int result = 0;
 
-        // PriorityQueue<Integer> priorityQueue = 
-        // new PriorityQueue<>(Collections.reverseOrder());
+        // k번째 큰 값을 찾기위해서 priorityQueue에서 최대값 추출을 k번 수행
+        for (int i = 0; i < k; i++) {
+            result = priorityQueue.poll();
+        }
 
-        // for (int num : nums) {
-        //     priorityQueue.add(num);
-        // }
+        // k번째 큰 값 반환
+        return result;
 
-        // int result = 0;
+        // 역순 정렬 이용방법
+        // Integer[] boxedNums = Arrays.stream(nums)
+        //                             .boxed()
+        //                             .toArray(Integer[]::new);
 
-        // for (int i = 0; i < k; i++) {
-        //     result = priorityQueue.poll();
-        // }
+        // Arrays.sort(boxedNums, Collections.reverseOrder());
 
-        // return result;
+        // return boxedNums[k - 1];
 
-        // // Max Heap 사용
+        // // 커스텀 Max Heap 사용
         // MaxHeap maxHeap = new MaxHeap(nums.length);
 
         // // maxHeap에 nums의 요소를 모두 담아준다
