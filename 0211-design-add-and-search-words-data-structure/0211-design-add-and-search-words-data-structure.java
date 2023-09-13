@@ -8,10 +8,10 @@ class WordDictionary {
     
     // word의 첫글자를 하나씩 잘라서 key로 만들어 저장하는 방식
     public void addWord(String word) {
-        addWordRecursively(word, root);
+        addWord(word, root);
     }
 
-    private void addWordRecursively(String word, Node node) {
+    private void addWord(String word, Node node) {
         // word의 길이가 0이 된다면
         if (word.length() == 0) {
             node.isEnd = true; // 해당 단어가 끝임을 표시하고
@@ -30,36 +30,35 @@ class WordDictionary {
         Node child = node.children.get(c);
 
         // 단어 하나 잘라서 재귀 호출
-        addWordRecursively(word.substring(1), child);
+        addWord(word.substring(1), child);
     }
     
-    // 노드를 타고 들어가면서 word의 길이가 0이 될 때까지 탐색
-    // .을 어떻게 처리해야하나?
     public boolean search(String word) {
-        return search(root, word, 0);
-        // return searchRecursively(word, root);
+        return search(word, root, 0);
     }
 
-    private boolean search(Node current, String word, int idx) {
-        if (current == null) {
+    private boolean search(String word, Node node, int idx) {
+        if (node == null) {
             return false;
         }
 
         if (idx == word.length()) {
-            return current.isEnd;
+            return node.isEnd;
         }
 
-        char ch = word.charAt(idx);
-        if (ch == '.') {
+        char c = word.charAt(idx);
+        if (c == '.') {
             boolean ret = false;
-            for (Node child : current.getChildren()) {
-                ret |= search(child, word, idx + 1);
+            for (Node child : node.getChildren()) {
+                ret |= search(word, child, idx + 1);
                 if (ret) {
                     break;
                 }
             }
             return ret;
-        } else return search(current.children.get(ch), word, idx + 1);
+        } else {
+            return search(word, node.children.get(c), idx + 1);
+        }
     }
 
     // public boolean searchRecursively(String word, Node node) {
