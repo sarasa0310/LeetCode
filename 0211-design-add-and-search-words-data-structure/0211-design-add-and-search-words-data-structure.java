@@ -47,6 +47,7 @@ class WordDictionary {
         }
 
         char c = word.charAt(idx);
+
         if (c == '.') {
             boolean ret = false;
             for (Node child : node.getChildren()) {
@@ -60,34 +61,6 @@ class WordDictionary {
             return search(word, node.children.get(c), idx + 1);
         }
     }
-
-    // public boolean searchRecursively(String word, Node node) {
-    //     if (node == null) return false;
-
-    //     // word의 길이가 0이 된다면 검색 성공 -> true 리턴
-    //     if (word.length() == 0) return true;
-
-    //     // 첫글자
-    //     char c = word.charAt(0);
-
-    //     // '.' 처리
-    //     if (c == '.') {
-    //         boolean ret = false;
-    //         for (Node child : node.getChildren()) {
-    //             ret |= searchRecursively(word.substring(1), child);
-    //             if (ret) {
-    //                 break;
-    //             }
-    //         }
-    //         return ret;
-    //     } else {
-    //         // 다음 노드
-    //         Node child = node.children.get(c);
-
-    //         // 단어 하나 잘라서 재귀 호출
-    //         return searchRecursively(word.substring(1), child);
-    //     }        
-    // }
 
 }
 
